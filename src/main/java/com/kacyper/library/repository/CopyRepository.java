@@ -1,6 +1,6 @@
 package com.kacyper.library.repository;
 
-import com.kacyper.library.domain.Book;
+import com.kacyper.library.domain.Copy;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -10,19 +10,23 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface BookRepository extends CrudRepository<Book, Long> {
+public interface CopyRepository extends CrudRepository<Copy, Long> {
 
     @Override
-    Optional<Book> findById(Long id);
+    List<Copy> findAll();
 
     @Override
-    List<Book> findAll();
+    Copy save(Copy copy);
 
     @Override
-    Book save (Book book);
+    Optional<Copy> findById(Long id);
 
-    void deleteById(Long id);
+    @Override
+    void deleteById(Long copyId);
+
+    @Override
+    long count();
 
     @Query
-    Optional<Book> retrieveRequestedTitle(@Param("title") String title);
+    int retrievedCopyQuantityByTitle(@Param("title") String title);
 }

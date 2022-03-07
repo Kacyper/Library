@@ -31,7 +31,7 @@ public class BookController {
     @GetMapping(value = "/getBook/{id}")
     public BookDto getReader(@PathVariable Long id) throws BookNotFoundException {
         return bookMapper.mapToBookDto(
-                dbServiceBook.getBook(id).orElseThrow(BookNotFoundException::new)
+                dbServiceBook.getBook(id)
         );
     }
 
@@ -47,7 +47,7 @@ public class BookController {
     }
 
     @PutMapping(value = "/updateBook/{id}")
-    public BookDto updateBook (@RequestBody BookDto bookDto) {
+    public BookDto updateBook(@RequestBody BookDto bookDto) {
         Book book = bookMapper.mapToBook(bookDto);
         Book saveBook = dbServiceBook.saveBook(book);
         return bookMapper.mapToBookDto(saveBook);

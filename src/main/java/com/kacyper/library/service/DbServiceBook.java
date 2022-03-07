@@ -1,6 +1,7 @@
 package com.kacyper.library.service;
 
 import com.kacyper.library.domain.Book;
+import com.kacyper.library.exception.BookNotFoundException;
 import com.kacyper.library.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ public class DbServiceBook {
         return bookRepository.findAll();
     }
 
-    public Optional<Book> getBook(final Long bookId) {
-        return bookRepository.findById(bookId);
+    public Book getBook(final Long id) throws BookNotFoundException {
+        return bookRepository.findById(id).orElseThrow(BookNotFoundException::new);
     }
 
     public Book saveBook(final Book book) {
@@ -32,4 +33,7 @@ public class DbServiceBook {
         bookRepository.deleteById(id);
     }
 
+    public Optional<Book> getBookByTitle(final String title) {
+        return bookRepository.retrieveRequestedTitle(title);
+    }
 }

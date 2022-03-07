@@ -1,21 +1,22 @@
 package com.kacyper.library.dto;
 
 import com.kacyper.library.domain.Copy;
+import com.kacyper.library.domain.Reader;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookDto {
+public class RentDto {
 
     private Long id;
-    private String title;
-    private String author;
-    private Integer releaseDate;
+    private Reader reader;
+    private LocalDate rentDate;
+    private LocalDate returnDate;
+    private Copy copy;
 
 }

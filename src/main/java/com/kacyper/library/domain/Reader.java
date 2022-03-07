@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,6 +37,12 @@ public class Reader {
     @Column(name = "Account_Creation_Date")
     private LocalDate accountCreationDate;
 
+    @OneToMany(targetEntity = Rent.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "reader")
+    private Set<Rent> rentSet;
 
-    //OneToMany to borrow class
+    public Reader(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.accountCreationDate = LocalDate.now();
+    }
 }

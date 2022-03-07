@@ -8,12 +8,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
+
+@NamedQuery(name = "Book.retrieveRequestedTitle",
+                query = "FROM Books WHERE title = :title")
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
-@Entity(name = "Book")
+@Entity(name = "Books")
 public class Book {
 
     @Id
@@ -35,6 +39,13 @@ public class Book {
     @Column(name = "Release_Date")
     private Integer releaseDate;
 
-    //One to many to copy class
+    @OneToMany(targetEntity = Copy.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "book")
+    private List<Copy> copyList;
 
+    public Book(Long id, String title, String author, Integer releaseDate) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.releaseDate = releaseDate;
+    }
 }

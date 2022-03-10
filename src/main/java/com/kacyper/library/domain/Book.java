@@ -1,6 +1,7 @@
 package com.kacyper.library.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,10 +9,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @NamedQuery(name = "Book.retrieveRequestedTitle",
-                query = "FROM Books WHERE title = :title")
+                query = "FROM Books WHERE title = :Title")
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -37,12 +39,13 @@ public class Book {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @NotNull
     @Column(name = "Release_Date")
-    private Integer releaseDate;
+    private LocalDate releaseDate;
 
     @OneToMany(targetEntity = Copy.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "book")
+    @JsonIgnore
     private List<Copy> copyList;
 
-    public Book(Long id, String title, String author, Integer releaseDate) {
+    public Book(Long id, String title, String author, LocalDate releaseDate) {
         this.id = id;
         this.title = title;
         this.author = author;

@@ -35,18 +35,18 @@ public class DbServiceCopy {
         return copyRepository.retrievedCopyQuantityByTitle(title);
     }
 
-//    public Copy saveCopy(final Copy copy) {
-//        Optional<Book> bookOptional = dbServiceBook.getBookByTitle(copy.getBook().getTitle());
-//        Book book = bookOptional.get();
-//
-//        copy.setBook(book);
-//
-//        return copyRepository.save(copy);
-//    }
+    public Copy saveCopy(final Copy copy) {
+        Optional<Book> bookOptional = dbServiceBook.getBookByTitle(copy.getBook().getTitle());
+        Book book = bookOptional.get();
 
-    public Copy saveCopy (final Copy copy){
+        copy.setBook(book);
+
         return copyRepository.save(copy);
     }
+
+//    public Copy saveCopy (final Copy copy){
+//        return copyRepository.save(copy);
+//    }
 
     public void deleteCopy(final Long copyId) {
         copyRepository.deleteById(copyId);

@@ -4,6 +4,7 @@ import com.kacyper.library.domain.Copy;
 import com.kacyper.library.dto.CopyDto;
 import com.kacyper.library.exception.CopyNotFoundException;
 import com.kacyper.library.mapper.CopyMapper;
+import com.kacyper.library.repository.BookRepository;
 import com.kacyper.library.service.DbServiceBook;
 import com.kacyper.library.service.DbServiceCopy;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @CrossOrigin("*")
 @RestController
@@ -28,10 +31,12 @@ public class CopyController {
     @Autowired
     private final DbServiceBook dbServiceBook;
 
+    @Autowired
+    private final BookRepository bookRepository;
+
     @GetMapping(value = "/getAllCopies")
     public List<CopyDto> getAllCopies() {
-        List<Copy> copyList = dbServiceCopy.getAllCopies();
-        return copyMapper.mapToCopyDtoList(copyList);
+        return copyMapper.mapToCopyDtoList(dbServiceCopy.getAllCopies());
     }
 
     @GetMapping(value = "/getCopyById/{id}")
@@ -41,20 +46,25 @@ public class CopyController {
         );
     }
 
-    @PostMapping(value = "/createCopy", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createCopy(@RequestBody CopyDto copyDto) {
-        copyMapper.mapToCopyDto(dbServiceCopy.saveCopy(copyMapper.mapToCopy(copyDto)));
-    }
+//    @PostMapping(value = "/createCopy", consumes = MediaType.APPLICATION_JSON_VALUE)
+//    public void createCopy(@RequestBody CopyDto copyDto) {
+//        copyMapper.mapToCopyDto(dbServiceCopy.saveCopy(copyMapper.mapToCopy(copyDto)));
+//    }
 
    @GetMapping(value = "/getCopyQuantity")
    public int getCopyQuantity(@RequestParam String title) {
     return dbServiceCopy.getAllAvailableCopiesByTitle(title);
 }
 
-//    @PostMapping(value = "/createCopy", consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public void createCopy(String title) {
+    @PostMapping(value = "/createCopy",  consumes = APPLICATION_JSON_VALUE)
+    public void createCopy(@RequestBody CopyDto copyDto) {
+        copyMapper.mapToCopyDto(dbServiceCopy.saveCopy(copyMapper.mapToCopy(copyDto)));
+    }
+
+//    @PostMapping(value = "/createCopy")
+//    public void createCopy(@RequestParam String title) {
 //        CopyDto copyDto = new CopyDto();
-//        copyDto.setBook(dbServiceBook.getBookByTitle(title).get());
+//        copyDto.setBook(bookRepository.retrieveRequestedTitle(title).get());
 //        copyDto.setRent(false);
 //        copyDto.setInLibrary(true);
 //        copyDto.setDestroyed(false);

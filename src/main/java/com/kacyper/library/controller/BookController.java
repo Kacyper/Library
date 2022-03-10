@@ -40,7 +40,7 @@ public class BookController {
         dbServiceBook.deleteBook(id);
     }
 
-    @PostMapping(value = "/createBook", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/createBook", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     void createBook(@RequestBody BookDto bookDto) {
         Book book = bookMapper.mapToBook(bookDto);
         dbServiceBook.saveBook(book);

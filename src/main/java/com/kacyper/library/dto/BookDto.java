@@ -1,21 +1,17 @@
 package com.kacyper.library.dto;
 
-import com.kacyper.library.domain.Copy;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.time.LocalDate;
 
 
-@Data
-@Builder
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
 public class BookDto {
 
     private Long id;
     private String title;
     private String author;
-    private Integer releaseDate;
+    private LocalDate releaseDate;
 
 }

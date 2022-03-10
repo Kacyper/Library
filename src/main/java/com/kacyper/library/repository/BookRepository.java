@@ -24,5 +24,5 @@ public interface BookRepository extends CrudRepository<Book, Long> {
     void deleteById(Long id);
 
     @Query
-    Optional<Book> retrieveRequestedTitle(@Param("title") String title);
+    Optional<Book> retrieveRequestedTitle(@Param("Title") String title);
 }

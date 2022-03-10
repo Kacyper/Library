@@ -19,4 +19,6 @@ public class RentDto {
     private LocalDate returnDate;
     private Copy copy;
 
+    public RentDto(Long id, Long id1, Long id2, LocalDate rentDate, LocalDate returnDate) {
+    }
 }

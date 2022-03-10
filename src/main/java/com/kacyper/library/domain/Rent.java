@@ -41,4 +41,12 @@ public class Rent {
         this.returnDate = returnDate;
         this.copy = copy;
     }
+
+    public Rent(Long id, Copy copy, Reader reader, LocalDate rentDate, LocalDate returnDate) {
+        this.id = id;
+        this.copy = copy;
+        this.reader = reader;
+        this.rentDate = rentDate;
+        this.returnDate = returnDate;
+    }
 }

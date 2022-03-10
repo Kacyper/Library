@@ -2,7 +2,6 @@ package com.kacyper.library.domain;
 
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,7 +14,6 @@ import java.util.List;
 )
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
 @Entity(name = "Copy")
 public class Copy {
@@ -27,28 +25,50 @@ public class Copy {
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "Title")
+    @JoinColumn(name = "Book_Id")
     private Book book;
 
-    @NotNull
-    @Column(name = "In_Library")
-    private boolean inLibrary;
-
-    @NotNull
-    @Column(name = "Destroyed")
-    private boolean destroyed;
-
-    @NotNull
-    @Column(name = "Rent")
-    private boolean rent;
+    @Column(name = "Status")
+    private RentalStatus rentalStatus;
 
     @OneToMany(targetEntity = Rent.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "copy")
-    private List<Rent> rentList;
+    private List<Copy> copyList;
 
-    public Copy(Book book, boolean inLibrary, boolean destroyed, boolean rent) {
-        this.book = book;
-        this.destroyed = false;
-        this.rent = false;
-        this.inLibrary = false;
+    public Copy(RentalStatus rentalStatus){
+        this.rentalStatus = rentalStatus;
     }
+
+    public Copy(Book book, RentalStatus rentalStatus) {
+        this.book = book;
+        this.rentalStatus = rentalStatus;
+    }
+
+    public Copy(Long id, Book book, RentalStatus rentalStatus) {
+        this.id = id;
+        this.book = book;
+        this.rentalStatus = rentalStatus;
+    }
+
 }
+
+//    @NotNull
+//    @Column(name = "In_Library")
+//    private boolean inLibrary;
+//
+//    @NotNull
+//    @Column(name = "Destroyed")
+//    private boolean destroyed;
+//
+//    @NotNull
+//    @Column(name = "Rent")
+//    private boolean rent;
+
+//    @OneToOne(targetEntity = Rent.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "copy")
+//    pubList<Rent> rentList;
+
+//    public Copy(Long id, Book book, boolean inLibrary, boolean rent, boolean destroyed) {
+//        this.book = book;
+//        this.destroyed = false;
+//        this.rent = false;
+//        this.inLibrary = false;
+//    }

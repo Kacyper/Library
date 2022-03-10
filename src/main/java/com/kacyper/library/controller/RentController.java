@@ -41,7 +41,7 @@ public class RentController {
     public void createRent(RentDto rentDto) {
         Rent rent = rentMapper.mapToRent(rentDto);
         dbServiceRent.saveRent(rent);
-        rent.getCopy().setRent(true);
+//        rent.getCopy().setRent(true);
     }
 
     @PutMapping(value = "/updateRent/{id}")

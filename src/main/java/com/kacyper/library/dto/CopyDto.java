@@ -1,6 +1,5 @@
 package com.kacyper.library.dto;
 
-import com.kacyper.library.domain.Book;
 import com.kacyper.library.domain.RentalStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Optional;
 
 @NamedQuery(
         name = "Copy.retrievedCopyQuantityByTitle",
@@ -24,14 +25,14 @@ public class Copy {
     @Column(name = "Copy_Id", unique = true)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "Book_Id")
     private Book book;
 
     @Column(name = "Status")
     private RentalStatus rentalStatus;
 
-    @OneToMany(targetEntity = Rent.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "copy")
+    @OneToMany(targetEntity = Rent.class, cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE}, fetch = FetchType.LAZY, mappedBy = "copy")
     private List<Copy> copyList;
 
     public Copy(RentalStatus rentalStatus){
@@ -48,7 +49,6 @@ public class Copy {
         this.book = book;
         this.rentalStatus = rentalStatus;
     }
-
 }
 
 //    @NotNull

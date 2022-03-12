@@ -2,6 +2,7 @@ package com.kacyper.library.service;
 
 import com.kacyper.library.domain.Book;
 import com.kacyper.library.domain.Copy;
+import com.kacyper.library.domain.RentalStatus;
 import com.kacyper.library.repository.BookRepository;
 import com.kacyper.library.repository.CopyRepository;
 import lombok.RequiredArgsConstructor;
@@ -52,5 +53,11 @@ public class DbServiceCopy {
         copyRepository.deleteById(copyId);
     }
 
+    public void updateRentalStatus(Long copyId, RentalStatus rentalStatus) {
+        Optional<Copy> optionalCopy = copyRepository.findById(copyId);
+        Copy copy = optionalCopy.get();
+        copy.setRentalStatus(rentalStatus);
+        copyRepository.save(copy);
+    }
 
 }

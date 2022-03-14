@@ -29,6 +29,7 @@ public class DbServiceRent {
 
     public Rent saveRent(final Rent rent) {
         rent.getCopy().setRentalStatus(RentalStatus.RENTED);
+        rent.setRentDate(LocalDate.now());
         copyRepository.save(rent.getCopy());
         return rentRepository.save(rent);
     }

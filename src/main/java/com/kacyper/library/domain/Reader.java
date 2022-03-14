@@ -2,6 +2,7 @@ package com.kacyper.library.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -37,12 +38,14 @@ public class Reader {
     @Column(name = "Account_Creation_Date")
     private LocalDate accountCreationDate;
 
-    @OneToMany(targetEntity = Rent.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "reader")
-    private Set<Rent> rentSet;
+    @OneToMany(targetEntity = Rent.class, cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE}, fetch = FetchType.EAGER, mappedBy = "readerId")
+    @JsonIgnore
+    private List<Rent> rentList;
 
     public Reader(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.accountCreationDate = LocalDate.now();
     }
+
 }

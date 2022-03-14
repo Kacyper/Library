@@ -23,7 +23,7 @@ public class Rent {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "Reader_Id")
-    private Reader reader;
+    private Reader readerId;
 
     @Column(name = "Rent_Date")
     private LocalDate rentDate;
@@ -35,17 +35,17 @@ public class Rent {
     @JoinColumn(name = "Copy_Id")
     private Copy copy;
 
-    public Rent(Reader reader, LocalDate rentDate, LocalDate returnDate, Copy copy) {
-        this.reader = reader;
+    public Rent(Copy copy, Reader readerId, LocalDate rentDate, LocalDate returnDate) {
+        this.readerId = readerId;
         this.rentDate = rentDate;
         this.returnDate = returnDate;
         this.copy = copy;
     }
 
-    public Rent(Long id, Copy copy, Reader reader, LocalDate rentDate, LocalDate returnDate) {
+    public Rent(Long id, Copy copy, Reader readerId, LocalDate rentDate, LocalDate returnDate) {
         this.id = id;
         this.copy = copy;
-        this.reader = reader;
+        this.readerId = readerId;
         this.rentDate = rentDate;
         this.returnDate = returnDate;
     }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/library")
@@ -37,11 +39,14 @@ public class RentController {
         dbServiceRent.deleteRent(id);
     }
 
-    @PostMapping(value = "/createRent")
-    public void createRent(RentDto rentDto) {
-        Rent rent = rentMapper.mapToRent(rentDto);
-        dbServiceRent.saveRent(rent);
-//        rent.getCopy().setRent(true);
+    @PostMapping(value = "/rentBook", consumes = APPLICATION_JSON_VALUE)
+    public void rentBook(@RequestBody RentDto rentDto) {
+        rentMapper.mapToRentDto(dbServiceRent.saveRent(rentMapper.mapToRent(rentDto)));
+    }
+
+    @PutMapping(value = "/returnBook")
+    public void returnBook(@RequestParam Long rentId) {
+        dbServiceRent.returnRent(rentId);
     }
 
     @PutMapping(value = "/updateRent/{id}")

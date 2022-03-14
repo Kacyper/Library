@@ -1,13 +1,13 @@
 package com.kacyper.library.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Optional;
 
 @NamedQuery(
         name = "Copy.retrievedCopyQuantityByTitle",
@@ -33,6 +33,7 @@ public class Copy {
     private RentalStatus rentalStatus;
 
     @OneToMany(targetEntity = Rent.class, cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE}, fetch = FetchType.LAZY, mappedBy = "copy")
+    @JsonIgnore
     private List<Copy> copyList;
 
     public Copy(RentalStatus rentalStatus){

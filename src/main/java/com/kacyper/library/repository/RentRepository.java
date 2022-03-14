@@ -10,6 +10,7 @@ import java.util.Optional;
 @Repository
 public interface RentRepository extends CrudRepository<Rent, Long> {
 
+    @Override
     List<Rent> findAll();
 
     @Override

@@ -1,7 +1,6 @@
 package com.kacyper.library.mapper;
 
 import com.kacyper.library.domain.Rent;
-import com.kacyper.library.dto.CopyDto;
 import com.kacyper.library.dto.RentDto;
 import com.kacyper.library.repository.CopyRepository;
 import com.kacyper.library.repository.ReaderRepository;
@@ -24,7 +23,7 @@ public class RentMapper {
         return new Rent(
                 rentDto.getId(),
                 copyRepository.findById(rentDto.getId()).get(),
-                readerRepository.findById(rentDto.getReader().getId()).get(),
+                readerRepository.findById(rentDto.getReaderId()).get(),
                 rentDto.getRentDate(),
                 rentDto.getReturnDate()
         );
@@ -33,8 +32,8 @@ public class RentMapper {
     public RentDto mapToRentDto(final Rent rent) {
         return new RentDto(
                 rent.getId(),
-                rent.getCopy().getId(),
-                rent.getReader().getId(),
+                rent.getReaderId(),
+                rent.getCopy(),
                 rent.getRentDate(),
                 rent.getReturnDate()
         );

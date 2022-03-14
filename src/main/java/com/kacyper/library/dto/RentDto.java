@@ -14,11 +14,16 @@ import java.time.LocalDate;
 public class RentDto {
 
     private Long id;
-    private Reader reader;
+    private Reader readerId;
     private LocalDate rentDate;
     private LocalDate returnDate;
     private Copy copy;
 
-    public RentDto(Long id, Long id1, Long id2, LocalDate rentDate, LocalDate returnDate) {
+    public RentDto(Long id, Reader readerId, Copy copy, LocalDate rentDate, LocalDate returnDate) {
+        this.id = id;
+        this.readerId = readerId;
+        this.copy = copy;
+        this.rentDate = rentDate;
+        this.returnDate = returnDate;
     }
 }

@@ -27,8 +27,6 @@ public class DbServiceRent {
         return rentRepository.findById(rentId);
     }
 
-//    public Rent saveRent(final Rent rent) {return rentRepository.save(rent);}
-
     public Rent saveRent(final Rent rent) {
         rent.getCopy().setRentalStatus(RentalStatus.RENTED);
         copyRepository.save(rent.getCopy());

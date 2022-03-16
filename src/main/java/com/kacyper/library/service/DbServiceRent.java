@@ -30,6 +30,7 @@ public class DbServiceRent {
     public Rent saveRent(final Rent rent) {
         rent.getCopy().setRentalStatus(RentalStatus.RENTED);
         rent.setRentDate(LocalDate.now());
+        rent.setReturnDate(LocalDate.now().plusDays(7));
         copyRepository.save(rent.getCopy());
         return rentRepository.save(rent);
     }
@@ -39,9 +40,10 @@ public class DbServiceRent {
         Rent rent1 = rentOptional.get();
         rent1.getCopy().setRentalStatus(RentalStatus.AVAILABLE);
         copyRepository.save(rent1.getCopy());
-        rent1.setReturnDate(LocalDate.now());
         rentRepository.save(rent1);
+        rentRepository.deleteById(rentId);
     }
+
 
     public void deleteRent(final Long id) {
         rentRepository.deleteById(id);

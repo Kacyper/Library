@@ -1,29 +1,28 @@
 package com.kacyper.library.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kacyper.library.domain.Copy;
 import com.kacyper.library.domain.Reader;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDate;
 
-@Data
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
+@Builder
+
 public class RentDto {
+
+    @JsonProperty("field_name")
 
     private Long id;
     private Reader readerId;
-    private LocalDate rentDate;
-    private LocalDate returnDate;
+//    private LocalDate rentDate;
+//    private LocalDate returnDate;
     private Copy copy;
 
-    public RentDto(Long id, Reader readerId, Copy copy, LocalDate rentDate, LocalDate returnDate) {
-        this.id = id;
-        this.readerId = readerId;
-        this.copy = copy;
-        this.rentDate = rentDate;
-        this.returnDate = returnDate;
-    }
+//    public RentDto() {}
+
 }

@@ -15,11 +15,4 @@ public class CopyDto {
     private Long id;
     private Long bookId;
     private RentalStatus rentalStatus;
-
-
-//    private Long id;
-//    private Book book;
-//    private boolean inLibrary;
-//    private boolean destroyed;
-//    private boolean rent;
 }

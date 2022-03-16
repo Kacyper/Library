@@ -20,23 +20,24 @@ public class RentMapper {
     private ReaderRepository readerRepository;
 
     public Rent mapToRent(final RentDto rentDto) {
-        return new Rent(
-                rentDto.getId(),
-                copyRepository.findById(rentDto.getId()).get(),
-                readerRepository.findById(rentDto.getReaderId()).get(),
-                rentDto.getRentDate(),
-                rentDto.getReturnDate()
-        );
+        return Rent.builder()
+                .id(rentDto.getId())
+                .copy(rentDto.getCopy())
+                .readerId(rentDto.getReaderId())
+//                .rentDate(rentDto.getRentDate())
+//                .returnDate(rentDto.getReturnDate())
+                .build();
     }
 
     public RentDto mapToRentDto(final Rent rent) {
-        return new RentDto(
-                rent.getId(),
-                rent.getReaderId(),
-                rent.getCopy(),
-                rent.getRentDate(),
-                rent.getReturnDate()
-        );
+        return RentDto.builder()
+                .id(rent.getId())
+                .copy(rent.getCopy())
+                .readerId(rent.getReaderId())
+//                .rentDate(rent.getRentDate())
+//                .returnDate(rent.getReturnDate())
+                .build();
+
     }
 
     public List<RentDto> mapToRentDtoList(final List<Rent> rentList) {
@@ -45,3 +46,22 @@ public class RentMapper {
                 .collect(Collectors.toList());
     }
 }
+//    public Rent mapToRent(final RentDto rentDto) {
+//        return new Rent(
+//                rentDto.getId(),
+//                rentDto.getReaderId(),
+//                rentDto.getCopy(),
+//                rentDto.getRentDate(),
+//                rentDto.getReturnDate()
+//        );
+//    }
+
+//    public RentDto mapToRentDto(final Rent rent) {
+//        return new RentDto(
+//                rent.getId(),
+//                rent.getReaderId(),
+//                rent.getCopy(),
+//                rent.getRentDate(),
+//                rent.getReturnDate()
+//        );
+//    }

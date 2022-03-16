@@ -19,7 +19,7 @@ public interface CopyRepository extends CrudRepository<Copy, Long> {
     Copy save(Copy copy);
 
     @Override
-    Optional<Copy> findById(Long id);
+    Optional<Copy> findById(Long copyId);
 
     @Override
     void deleteById(Long copyId);

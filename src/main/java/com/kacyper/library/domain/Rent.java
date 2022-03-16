@@ -1,18 +1,16 @@
 package com.kacyper.library.domain;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@NoArgsConstructor
-@Data
-@Builder
+@Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity(name = "Rent")
 public class Rent {
 
@@ -21,7 +19,7 @@ public class Rent {
     @Column(name = "Id")
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "Reader_Id")
     private Reader readerId;
 
@@ -31,22 +29,8 @@ public class Rent {
     @Column(name = "Return_Date")
     private LocalDate returnDate;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "Copy_Id")
     private Copy copy;
 
-    public Rent(Copy copy, Reader readerId, LocalDate rentDate, LocalDate returnDate) {
-        this.readerId = readerId;
-        this.rentDate = rentDate;
-        this.returnDate = returnDate;
-        this.copy = copy;
-    }
-
-    public Rent(Long id, Copy copy, Reader readerId, LocalDate rentDate, LocalDate returnDate) {
-        this.id = id;
-        this.copy = copy;
-        this.readerId = readerId;
-        this.rentDate = rentDate;
-        this.returnDate = returnDate;
-    }
 }

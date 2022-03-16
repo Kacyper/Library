@@ -19,7 +19,7 @@ public class CopyMapper {
     public Copy mapToCopy(final CopyDto copyDto) {
         return new Copy(
               copyDto.getId(),
-                bookRepository.findById(copyDto.getBookId()).get(),
+                copyDto.getBookId(),
                 copyDto.getRentalStatus()
         );
     }

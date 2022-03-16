@@ -41,7 +41,7 @@ public class Book {
     @Column(name = "Release_Date")
     private LocalDate releaseDate;
 
-    @OneToMany(targetEntity = Copy.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "book")
+    @OneToMany(targetEntity = Copy.class, cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE}, fetch = FetchType.EAGER, mappedBy = "book")
     @JsonIgnore
     private List<Copy> copyList;
 

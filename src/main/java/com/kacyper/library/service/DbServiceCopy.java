@@ -45,10 +45,6 @@ public class DbServiceCopy {
         return copyRepository.save(copy);
     }
 
-//    public Copy saveCopy (final Copy copy){
-//        return copyRepository.save(copy);
-//    }
-
     public void deleteCopy(final Long copyId) {
         copyRepository.deleteById(copyId);
     }

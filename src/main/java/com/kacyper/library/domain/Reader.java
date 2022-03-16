@@ -38,7 +38,7 @@ public class Reader {
     @Column(name = "Account_Creation_Date")
     private LocalDate accountCreationDate;
 
-    @OneToMany(targetEntity = Rent.class, cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE}, fetch = FetchType.EAGER, mappedBy = "readerId")
+    @OneToMany(targetEntity = Rent.class, cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH}, fetch = FetchType.EAGER, mappedBy = "readerId")
     @JsonIgnore
     private List<Rent> rentList;
 

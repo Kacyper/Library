@@ -49,10 +49,4 @@ public class RentController {
         dbServiceRent.returnRent(rentId);
     }
 
-    @PutMapping(value = "/updateRent/{id}")
-    public RentDto updateRent(@RequestBody RentDto rentDto) {
-        Rent rent = rentMapper.mapToRent(rentDto);
-        Rent saveRent = dbServiceRent.saveRent(rent);
-        return rentMapper.mapToRentDto(saveRent);
-    }
 }

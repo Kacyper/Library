@@ -1,7 +1,9 @@
 package com.kacyper.library.service;
 
+import com.kacyper.library.domain.Book;
 import com.kacyper.library.domain.Rent;
 import com.kacyper.library.domain.RentalStatus;
+import com.kacyper.library.repository.BookRepository;
 import com.kacyper.library.repository.CopyRepository;
 import com.kacyper.library.repository.RentRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,8 @@ public class DbServiceRent {
     private final RentRepository rentRepository;
 
     private final CopyRepository copyRepository;
+
+    private final BookRepository bookRepository;
 
     public List<Rent> getAllRentals() {
         return rentRepository.findAll();

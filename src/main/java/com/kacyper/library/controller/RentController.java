@@ -39,14 +39,9 @@ public class RentController {
         dbServiceRent.deleteRent(id);
     }
 
-//    @PostMapping(value = "/rentBook", consumes = APPLICATION_JSON_VALUE)
-//    public void rentBook(@RequestBody RentDto rentDto) {
-//        rentMapper.mapToRentDto(dbServiceRent.saveRent(rentMapper.mapToRent(rentDto)));
-//    }
-
-    @PostMapping(value = "/rentBook")
-    public void rentBook(@RequestParam Long bookId, @RequestParam Long readerId) {
-       dbServiceRent.saveRents(bookId, readerId);
+    @PostMapping(value = "/rentBook", consumes = APPLICATION_JSON_VALUE)
+    public void rentBook(@RequestBody RentDto rentDto) {
+        rentMapper.mapToRentDto(dbServiceRent.saveRent(rentMapper.mapToRent(rentDto)));
     }
 
     @PutMapping(value = "/returnBook")
